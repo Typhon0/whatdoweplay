@@ -5,12 +5,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL: string = 'https://api.steampowered.com/';
-  apiKey : string = '210B2A656590F165F072AC2A80A9A626'
+  apiURL = 'https://api.steampowered.com/';
+  apiKey = '210B2A656590F165F072AC2A80A9A626';
   constructor(private httpClient: HttpClient) { }
 
 
-  public getOwnedGames(userId){
-    return this.httpClient.get(this.apiURL+'IPlayerService/GetOwnedGames/v0001/?key='+this.apiKey+'&steamid='+userId+'&format=json')
+  public getOwnedGames(userId) {
+    return this.httpClient.get(this.apiURL + 'IPlayerService/GetOwnedGames/v0001/?key='
+      + this.apiKey + '&steamid=' + userId + '&format=json');
   }
 }
