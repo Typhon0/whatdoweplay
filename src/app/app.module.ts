@@ -10,10 +10,12 @@ import { MaterialModule } from './material.module';
 import { from } from 'rxjs';
 import { SteamidFormComponent } from './steamid-form/steamid-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CompareUsersComponent } from './compare-users/compare-users.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SteamidFormComponent
+    SteamidFormComponent,
+    CompareUsersComponent
   ],
   imports: [
     BrowserModule,

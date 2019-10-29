@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-steamid-form',
@@ -11,7 +12,8 @@ import { ApiService } from '../api.service';
 export class SteamidFormComponent implements OnInit {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {}
+  constructor(private fb: FormBuilder, private router: Router,
+    private dataservice:DataService) { }
 
   ngOnInit() {
     /* Initiate the form structure */
@@ -34,8 +36,15 @@ export class SteamidFormComponent implements OnInit {
   }
 
   onSubmit(data) {
-    this.apiService.getOwnedGames('76561197960434622').subscribe(res => {
-      console.log(res);
+    var userId = Array<Number>();
+    userId.push(data.userid)
+    data.friends_id.forEach(elem => {
+      userId.push(elem.id)
     });
+    this.dataservice.saveIds(userId);
+    this.router.navigate(['/compare']);
+
+
+
   }
 }
