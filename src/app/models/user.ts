@@ -1,10 +1,10 @@
 import { Game } from './game';
 
 export class User {
-    userId: Number;
+    userId: number;
     games: Game[];
 
-    constructor(userId: Number, games: Array<Game>) {
+    constructor(userId: number, games: Array<Game>) {
         this.userId = userId;
         this.games = games;
     }

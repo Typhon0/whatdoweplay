@@ -5,8 +5,8 @@ import { CompareUsersComponent } from './compare-users/compare-users.component';
 
 
 const routes: Routes = [
-  {path:'', component: SteamidFormComponent},
-  {path:'compare', component: CompareUsersComponent}
+  { path: '', component: SteamidFormComponent },
+  { path: 'compare', component: CompareUsersComponent }
 ];
 
 @NgModule({

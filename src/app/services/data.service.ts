@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-  userIds: Array<Number>=[];
+  userIds: Array<number> = [];
   constructor() {
 
   }
-  saveIds(ids:any){
-      this.userIds = ids;
+  saveIds(ids: any) {
+    this.userIds = ids;
   }
-  retrieveIDs(){
-      return this.userIds;
+  retrieveIDs() {
+    return this.userIds;
   }
 }

@@ -12,8 +12,7 @@ import { DataService } from '../services/data.service';
 export class SteamidFormComponent implements OnInit {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router,
-    private dataservice:DataService) { }
+  constructor(private fb: FormBuilder, private router: Router, private dataservice: DataService) { }
 
   ngOnInit() {
     /* Initiate the form structure */
@@ -36,10 +35,10 @@ export class SteamidFormComponent implements OnInit {
   }
 
   onSubmit(data) {
-    var userId = Array<Number>();
-    userId.push(data.userid)
+    const userId = Array<number>();
+    userId.push(data.userid);
     data.friends_id.forEach(elem => {
-      userId.push(elem.id)
+      userId.push(elem.id);
     });
     this.dataservice.saveIds(userId);
     this.router.navigate(['/compare']);

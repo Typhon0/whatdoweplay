@@ -15,10 +15,10 @@ export class CompareUsersComponent implements OnInit {
   users = Array<User>();
   sameGames = Array<Game>();
   ngOnInit() {
-    let userId = this.dataservice.retrieveIDs()
+    const userId = this.dataservice.retrieveIDs();
     userId.forEach(id => {
       this.apiService.getOwnedGames(id).subscribe((res: any) => {
-        let games = Array<Game>();
+        const games = Array<Game>();
         res.response.games.forEach(element => {
           games.push(new Game(element));
         });
@@ -26,7 +26,7 @@ export class CompareUsersComponent implements OnInit {
       });
     });
 
-    //todo merge and remove duplicate
+    // todo merge and remove duplicate
 
   }
 
