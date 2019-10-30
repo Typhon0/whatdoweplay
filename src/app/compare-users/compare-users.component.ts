@@ -16,18 +16,26 @@ export class CompareUsersComponent implements OnInit {
   sameGames = Array<Game>();
   ngOnInit() {
     const userId = this.dataservice.retrieveIDs();
-    userId.forEach(id => {
-      this.apiService.getOwnedGames(id).subscribe((res: any) => {
-        const games = Array<Game>();
-        res.response.games.forEach(element => {
-          games.push(new Game(element));
-        });
-        this.users.push(new User(id, games));
-      });
-    });
 
-    // todo merge and remove duplicate
+
+    new Promise((resolve, reject) => {
+      let games = Array<Game>();
+      this.apiService.getOwnedGamesForUsers(userId).subscribe(res => {
+        res.forEach(elem => {
+          elem.response.games.forEach(elem => {
+            games.push(new Game(elem))
+          })
+        })
+        resolve(games);
+      })
+    }).then((games: Array<Game>) => {
+      console.log(games)
+      let filtered = games.filter((v,i,a)=>a.findIndex(t=>(t.appid === v.appid))!=i)
+
+
+      console.log(filtered)
+      this.sameGames = filtered;
+    })
 
   }
-
 }
