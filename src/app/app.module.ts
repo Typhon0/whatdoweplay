@@ -8,14 +8,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 import { from } from 'rxjs';
-import { SteamidFormComponent } from './steamid-form/steamid-form.component';
+import { SteamidFormComponent } from './components/steamid-form/steamid-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CompareUsersComponent } from './compare-users/compare-users.component';
+import { CompareUsersComponent } from './components/compare-users/compare-users.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     SteamidFormComponent,
-    CompareUsersComponent
+    CompareUsersComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

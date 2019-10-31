@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-steamid-form',

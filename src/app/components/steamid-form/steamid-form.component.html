@@ -1,0 +1,24 @@
+<mat-card class="main-card">
+    <mat-card-content>	
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" class="user-form">
+    <mat-form-field class="form-full-width">
+      <input placeholder="My ID" matInput formControlName="userid" />
+    </mat-form-field>
+    <div formArrayName="friends_id">
+      <mat-action-list>
+        <div *ngFor="let item of friendsID.controls; let pointIndex=index" [formGroupName]="pointIndex">
+          <mat-form-field class="form-full-width">
+            <input matInput placeholder="Friend ID" formControlName="id" />
+            <button mat-button matSuffix type="button" (click)="deleteSellingPoint(pointIndex)">-</button>
+          </mat-form-field>
+        </div>
+      </mat-action-list>
+
+      <button mat-button type="button" (click)="addSellingPoint()">+</button>
+    </div>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">Submit</button>
+    </mat-card-actions>
+  </form>
+</mat-card-content>
+</mat-card>

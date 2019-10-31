@@ -21,26 +21,26 @@ export class ApiService {
     return this.httpClient.get(this.apiURL + 'IPlayerService/GetOwnedGames/v0001/?key='
       + this.apiKey + '&steamid=' + userId + '&format=json&include_appinfo=true&include_played_free_games=true');
   }
-  public getOwnedGamesForUsers(userId: number[]) {
-    let games = Array<Game>();
-    let response = [];
-    userId.forEach(id => {
-      response.push(this.getOwnedGames(id))
-    });
 
-    return forkJoin(response)
-}
+
+  public getOwnedGamesForUsers(userId: number[]) {
+    const response = [];
+    userId.forEach(id => {
+      response.push(this.getOwnedGames(id));
+    });
+    return forkJoin(response);
+  }
 
   public resolveProfile(info) {
 
-    let urlMatch;
-    if ((urlMatch = info.match(reProfileURL)) !== null)
+    const urlMatch = info.match(reProfileURL);
+    if (urlMatch !== null) {
       return Promise.resolve(urlMatch[1]);
-
-    let idMatch;
-    if ((idMatch = info.match(reProfileID)) !== null) {
+    }
+    const idMatch = info.match(reProfileID);
+    if (idMatch !== null) {
       const id = idMatch[1];
-      if (resolveCache.has(id)) return Promise.resolve(resolveCache.get(id));
+      if (resolveCache.has(id)) { return Promise.resolve(resolveCache.get(id)); }
 
       return this
         .httpClient.get(`ISteamUser/ResolveVanityURL/v1?vanityurl=${id}`).toPromise()

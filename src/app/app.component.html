@@ -1,9 +1,11 @@
-<div style="text-align:center">
-  <h1>
-    What Do We Play?
-  </h1>
-  <h3>
-    Find Steam apps that you have in common with your friends, fast, so you're not wasting time asking, "What do we play?".
-  </h3>
+<div [ngClass]="{'theme-alternate': isDarkTheme | async}" fxLayout="column" fxFlexFill
+  class="mat-typography app-frame mat-app-background">
+
+  <app-header></app-header>
+
+  <div fxFlex>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+
 </div>
-<router-outlet></router-outlet>

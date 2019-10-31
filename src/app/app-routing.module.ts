@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SteamidFormComponent } from './steamid-form/steamid-form.component';
-import { CompareUsersComponent } from './compare-users/compare-users.component';
+import { SteamidFormComponent } from './components/steamid-form/steamid-form.component';
+import { CompareUsersComponent } from './components/compare-users/compare-users.component';
 
 
 const routes: Routes = [
