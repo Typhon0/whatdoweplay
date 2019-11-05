@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 import { from } from 'rxjs';
-import {GridLoaderComponent} from './components/loader/gridloader.component'
+import {GridLoaderComponent} from './components/loader/gridloader.component';
 import { SteamidFormComponent } from './components/steamid-form/steamid-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompareUsersComponent } from './components/compare-users/compare-users.component';
