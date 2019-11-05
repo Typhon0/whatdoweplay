@@ -14,6 +14,7 @@ import { CompareUsersComponent } from './components/compare-users/compare-users.
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { GridLoaderModule } from '@bit/joshk.ng-spinners.grid-loader';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    GridLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

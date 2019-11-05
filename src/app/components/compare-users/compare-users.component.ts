@@ -10,11 +10,13 @@ import { intersectionBy } from 'lodash';
   styleUrls: ['./compare-users.component.scss']
 })
 export class CompareUsersComponent implements OnInit {
+  loader = false;
 
   constructor(private apiService: ApiService, private dataservice: DataService) { }
   sameGames = Array<Game>();
   ngOnInit() {
     const userId = this.dataservice.retrieveIDs();
+    this.loader = true;
 
 
     new Promise((resolve, reject) => {
@@ -35,6 +37,8 @@ export class CompareUsersComponent implements OnInit {
       const gamesArray = users.map((user) => user.games);
       const filtered = intersectionBy(gamesArray, 'appid');
       this.sameGames = filtered[0];
+      this.loader = false;
+
     });
 
   }
