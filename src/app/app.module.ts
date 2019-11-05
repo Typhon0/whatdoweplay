@@ -8,13 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 
 import { from } from 'rxjs';
+import {GridLoaderComponent} from './components/loader/gridloader.component'
 import { SteamidFormComponent } from './components/steamid-form/steamid-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompareUsersComponent } from './components/compare-users/compare-users.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { GridLoaderModule } from '@bit/joshk.ng-spinners.grid-loader';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { GridLoaderModule } from '@bit/joshk.ng-spinners.grid-loader';
     SteamidFormComponent,
     CompareUsersComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    GridLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,6 @@ import { GridLoaderModule } from '@bit/joshk.ng-spinners.grid-loader';
     BrowserAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
-    GridLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
