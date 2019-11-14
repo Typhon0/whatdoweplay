@@ -6,11 +6,14 @@
   width: 100%;
 }
 
+.main-card{
+  min-height: 50vh;
 
-.main-card {
-  height: 50vh;
+}
+.form-container {
 
   display: flex;
+
   justify-content: center;
   align-items: center;
 

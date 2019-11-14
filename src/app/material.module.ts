@@ -11,6 +11,7 @@ import {
   MatTableModule,
   MatGridListModule,
   MatSlideToggleModule,
+  MatCheckboxModule,
   MatButtonToggleModule
 } from '@angular/material';
 
@@ -26,6 +27,7 @@ import {
     MatTableModule,
     MatGridListModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
     MatButtonToggleModule
   ],
   exports: [
@@ -39,6 +41,7 @@ import {
     MatTableModule,
     MatGridListModule,
     MatSlideToggleModule,
+    MatCheckboxModule,
     MatButtonToggleModule
   ]
 })

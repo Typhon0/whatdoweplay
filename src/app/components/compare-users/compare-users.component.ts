@@ -16,6 +16,7 @@ export class CompareUsersComponent implements OnInit {
   sameGames = Array<Game>();
   ngOnInit() {
     const userId = this.dataservice.retrieveIDs();
+    console.log(userId);
     this.loader = true;
 
 
@@ -23,13 +24,15 @@ export class CompareUsersComponent implements OnInit {
       const users = Array<User>();
       this.apiService.getOwnedGamesForUsers(userId).subscribe(res => {
         res.forEach(elem => {
-          let i = 0;
-          const games = Array<Game>();
-          elem.response.games.forEach((gameJson: any) => {
-            games.push(new Game(gameJson));
-          });
-          users.push(new User(userId[i], games));
-          i++;
+          if (elem.response.games !== undefined || elem.response.games.length > 0) {
+            let i = 0;
+            const games = Array<Game>();
+            elem.response.games.forEach((gameJson: any) => {
+              games.push(new Game(gameJson));
+            });
+            users.push(new User(userId[i], games));
+            i++;
+          }
         });
         resolve(users);
       });
