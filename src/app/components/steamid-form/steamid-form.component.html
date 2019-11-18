@@ -12,6 +12,7 @@
       </form>
     </div>
 
+    
     <form *ngIf="friends != undefined" [formGroup]="friendForm" (ngSubmit)="onSubmitFriend(friendForm.value)" class="friend-form">
 
       <div  gdGap="10px" gdColumns="repeat(auto-fill, minmax(200px, 1fr))">

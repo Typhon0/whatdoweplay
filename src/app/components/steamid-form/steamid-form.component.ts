@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
+import { GoogleAnalyticsService } from '../../services/google-analytics.service';
 
 @Component({
   selector: 'app-steamid-form',
@@ -15,7 +16,8 @@ export class SteamidFormComponent implements OnInit {
   friends: any;
 
 
-  constructor(private fb: FormBuilder, private router: Router, private dataservice: DataService, private apiservice: ApiService) { }
+  constructor(private fb: FormBuilder, private router: Router, private dataservice: DataService, private apiservice: ApiService,
+              public googleAnalyticsService: GoogleAnalyticsService) { }
 
   ngOnInit() {
     /* Initiate the form structure */
@@ -47,6 +49,10 @@ export class SteamidFormComponent implements OnInit {
 
   onSubmit(data) {
 
+    this
+      .googleAnalyticsService
+      .eventEmitter('submit_steam_id', 'steamid', 'user', 'click', 10);
+
     this.apiservice.resolve(data.userid).then((userid) => {
 
       this.friendForm = this.fb.group({
@@ -64,6 +70,9 @@ export class SteamidFormComponent implements OnInit {
   }
 
   onSubmitFriend(data) {
+    this
+    .googleAnalyticsService
+    .eventEmitter('submit_selected_friends', 'steamid', 'user_friends', 'click', 10);
     if (data.checkboxes.length > 0) {
       this.dataservice.saveIds(data.checkboxes);
       this.router.navigate(['/compare']);

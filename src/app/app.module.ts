@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { from } from 'rxjs';
-import {GridLoaderComponent} from './components/loader/gridloader.component';
+import { GridLoaderComponent } from './components/loader/gridloader.component';
 import { SteamidFormComponent } from './components/steamid-form/steamid-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CompareUsersComponent } from './components/compare-users/compare-users.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GoogleAnalyticsService } from './services/google-analytics.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     FlexLayoutModule,
   ],
-  providers: [],
+  providers: [GoogleAnalyticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
