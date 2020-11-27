@@ -1,1 +1,4 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# What do we play ?
+
+Find Steam apps that you have in common with your friends, fast,
+so you're not wasting time asking, "What do we play?".
