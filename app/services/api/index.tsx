@@ -1,12 +1,11 @@
 import axios, { AxiosResponse } from "axios";
 
-axios.defaults.baseURL = process.env.STEAM_API_URL;
-const API_KEY = process.env.STEAM_API_KEY;
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_STEAM_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_STEAM_API_KEY;
 const resolveCache = new Map();
 const STATUS_SUCCESS = 1;
 
 export const getOwnedGames = (userId): Promise<AxiosResponse> => {
-  console.log(API_KEY);
   return axios.get(
     `IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${userId}&format=json&include_appinfo=true&include_played_free_games=true`
   );
