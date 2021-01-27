@@ -7,27 +7,46 @@ import {
     Content,
     Panel,
     Footer,
+    Button,
+    Icon,
+    IconButton,
 } from "rsuite";
-import { getUserFriends, resolveFriends } from "../../services/api";
+import { RadioContext } from "rsuite/lib/RadioGroup";
+import { getOwnedGamesForUsers, getUserFriends, resolveFriends } from "../../services/api";
 import { SearchUserInput } from "../SearchUserInput/SearchUserInput";
 import { UserListGrid } from "../UserListGrid/UserListGrid";
+import { intersectionBy } from 'lodash';
+import { GameListGrid } from "../GameListGrid/GameListGrid";
 
 const RootLayout = (props) => {
     const [friends, setFriends] = React.useState(undefined);
     const [Loading, setLoading] = React.useState(false);
+    const [selected, setSelected] = React.useState([]);
+    const [gamesInCommon, setGamesInCommon] = React.useState([]);
 
     const handleSetSteamId = async (id: number) => {
 
         setLoading(true)
+        setSelected([...selected, id])
         const friends = await getUserFriends(id);
         const friendsResolved = await resolveFriends(friends.data.friendslist.friends);
         setFriends(friendsResolved.data.response.players)
         setLoading(false)
     }
 
-    const cleanResult = async () => {
-
+    const handleNext = async (event: React.SyntheticEvent<Element, Event>) => {
+        console.log(event.target)
+        console.log(selected)
+        const games: any = await getOwnedGamesForUsers(selected)
+        const gamesArray = games.map((user) => user.games);
+        const filtered = intersectionBy(gamesArray, 'appid');
+        console.log(filtered[0])
+        setGamesInCommon(filtered[0])
+    }
+    const cleanResult = () => {
         setFriends([])
+        setGamesInCommon([])
+        setSelected([])
     }
 
     return (
@@ -56,14 +75,28 @@ const RootLayout = (props) => {
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item colspan={24}>
 
-                        {friends?.length > 0 && (
+                        {friends?.length > 0 && gamesInCommon.length == 0 && (
                             <Panel shaded bordered bodyFill>
-                                <UserListGrid users={friends}></UserListGrid>
+                                <FlexboxGrid justify="end" style={{ margin: 10 }}>
+                                    <IconButton onClick={handleNext} icon={<Icon icon="arrow-right" />} placement="right">
+                                        Next
+                                            </IconButton>
+                                </FlexboxGrid>
+                                <UserListGrid selected={selected} setSelected={setSelected} users={friends}></UserListGrid>
+                            </Panel>
+                        )}
+
+                        {friends?.length > 0 && gamesInCommon.length > 0 && (
+                            <Panel shaded bordered bodyFill>
+                                <GameListGrid gamesInCommon={gamesInCommon}></GameListGrid>
                             </Panel>
                         )}
 
 
+
+
                     </FlexboxGrid.Item>
+
                 </FlexboxGrid>
             </Content>
             <Footer></Footer>

@@ -7,7 +7,7 @@ const STATUS_SUCCESS = 1;
 
 export const getOwnedGames = (userId): Promise<AxiosResponse> => {
   return axios.get(
-    `IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${userId}&format=json&include_appinfo=true&include_played_free_games=true`
+    `IPlayerService/GetOwnedGames/v0001/?key=${API_KEY}&steamid=${userId}&format=json&include_appinfo=true&include_played_free_games=true`
   );
 };
 
@@ -18,11 +18,19 @@ export const getProfileSummaries = (useridArray): Promise<AxiosResponse> => {
 };
 
 export const getOwnedGamesForUsers = (userId: number[]) => {
-  let response = [];
-  userId.forEach((id) => {
-    response.push(getOwnedGames(id));
-  });
-  return Promise.all(response);
+  return new Promise((resolve, reject) => {
+    let response = [];
+    userId.forEach((id) => {
+      response.push(getOwnedGames(id));
+    });
+    Promise.all(response).then(data => {
+      let result = []
+      data.forEach((element, index) => {
+        result.push({ steamId: userId[index], games: element.data.response.games })
+      });
+      resolve(result)
+    });
+  })
 };
 
 /**

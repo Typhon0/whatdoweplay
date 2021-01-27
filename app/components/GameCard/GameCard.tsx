@@ -9,27 +9,19 @@ const styleCenter = {
     alignItems: "center",
 };
 
-export const UserCard = (props) => {
+export const GameCard = (props) => {
     return (
         <Panel
-            onClick={(e) => {
-                props.onSelect(props.user.steamid);
-            }}
             shaded
             bodyFill
-            className="card"
-
             style={{
                 margin: 5,
-                backgroundColor: props.selected ? "#292D33" : "",
                 cursor: "pointer",
-
-                border: props.selected ? "1px solid #3c3f43" : "1px solid transparent",
             }}
         >
             <FlexboxGrid>
                 <FlexboxGrid.Item colspan={8} style={styleCenter}>
-                    <Avatar size="lg" src={props.user.avatarfull} />
+                    <Avatar size="lg" src={props.game.img_icon_url} />
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item
                     colspan={6}
@@ -46,7 +38,7 @@ export const UserCard = (props) => {
                             fontWeight: 500,
                         }}
                     >
-                        {props.user.personaname}
+                        {props.game.name}
                     </div>
                 </FlexboxGrid.Item>
             </FlexboxGrid>
