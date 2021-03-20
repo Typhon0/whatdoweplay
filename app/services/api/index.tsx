@@ -76,3 +76,14 @@ export const resolveFriends = (friends): Promise<any> => {
     });
   })
 };
+
+export const login = (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    axios.post(`/api/auth/login`).then((response: AxiosResponse) => {
+      console.log(response.data)
+      resolve(response.data)
+    }).catch(err => {
+      throw err
+    });
+  })
+};

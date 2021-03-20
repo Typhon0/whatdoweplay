@@ -11,7 +11,7 @@ import {
     IconButton,
 } from "rsuite";
 import { RadioContext } from "rsuite/lib/RadioGroup";
-import { getOwnedGamesForUsers, getUserFriends, resolveFriends } from "../../services/api";
+import { getOwnedGamesForUsers, getUserFriends, login, resolveFriends } from "../../services/api";
 import { SearchUserInput } from "../SearchUserInput/SearchUserInput";
 import { UserListGrid } from "../UserListGrid/UserListGrid";
 import { intersectionBy } from 'lodash';
@@ -95,6 +95,9 @@ class RootLayout extends React.Component<IProps, IState>{
 
                 )}
                 <Header>
+                    <IconButton href="/api/auth/login" icon={<Icon icon="arrow-right" />} placement="right">
+                        Login
+                                                </IconButton>
                     <FlexboxGrid justify="center">
                         <FlexboxGrid.Item style={{ textAlign: "center" }} colspan={6}>
                             <h1>What Do We Play ?</h1>
