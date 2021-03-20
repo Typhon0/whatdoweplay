@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent } from "react";
-import { Icon, Input, InputGroup } from "rsuite";
+import { Input, InputGroup, Icon } from "rsuite";
 import { resolveUser } from "../../services/api";
 
 type SearchUserInputProps = {
@@ -11,19 +11,17 @@ export const SearchUserInput: FunctionComponent<SearchUserInputProps> = (props) 
   const [inputValue, setInputValue] = React.useState<undefined | string>(undefined);
 
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     props.cleanResult()
-    resolveUser(inputValue).then((steamId: number) => {
-      props.handleSetSteamId(steamId)
-    }).catch(err => {
+    let steamId: any = await resolveUser(inputValue)
+    props.handleSetSteamId(steamId.steamID64)
 
-      console.log(err)
-    })
   }
 
   const handleChange = (value: any, event: SyntheticEvent) => {
     setInputValue(value)
   }
+
   return (
     <InputGroup size="lg" inside style={{ width: "100%" }}>
       <Input type="text" onChange={handleChange} onPressEnter={handleSearch} placeholder={"steamId or custom URL"} />

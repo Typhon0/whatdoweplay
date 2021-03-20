@@ -3,6 +3,7 @@ import {
     FlexboxGrid,
     Panel,
 } from "rsuite";
+
 const styleCenter = {
     display: "flex",
     justifyContent: "center",
@@ -21,7 +22,7 @@ export const GameCard = (props) => {
         >
             <FlexboxGrid>
                 <FlexboxGrid.Item colspan={8} style={styleCenter}>
-                    <Avatar size="lg" src={props.game.img_icon_url} />
+                    <Avatar size="lg" src={`http://media.steampowered.com/steamcommunity/public/images/apps/${props.game.appid}/${props.game.img_icon_url}.jpg`} />
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item
                     colspan={6}

@@ -1,10 +1,11 @@
 
 import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from 'next';
+import { intersectionBy } from 'lodash';
+
 axios.defaults.baseURL = process.env.STEAM_API_URL;
 const API_KEY = process.env.NEXT_PUBLIC_STEAM_API_KEY;
-const resolveCache = new Map();
-const STATUS_SUCCESS = 1;
+
 
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
     const { method, query: { steamid } } = _req
@@ -12,12 +13,16 @@ const handler = (_req: NextApiRequest, res: NextApiResponse) => {
         case 'GET':
             getOwnedGames(steamid).then(data => {
                 res.send(data)
-            })
+            }).catch(err => {
+                console.log(err)
+            });
             break
         case 'POST':
             getOwnedGamesForUsers(_req.body).then(data => {
                 res.send(data)
-            })
+            }).catch(err => {
+                console.log(err)
+            });
             break
         default:
             res.setHeader('Allow', ['GET', 'POST'])
@@ -37,7 +42,7 @@ const getOwnedGames = (steamId) => {
     });
 }
 
-const getOwnedGamesForUsers = (userId: number[]) => {
+const getOwnedGamesForUsers = (userId: string[]) => {
     return new Promise((resolve, reject) => {
         let response = [];
         userId.forEach((id) => {
@@ -45,8 +50,9 @@ const getOwnedGamesForUsers = (userId: number[]) => {
         });
         Promise.all(response).then(data => {
             let result = []
+            console.log(data)
             data.forEach((element, index) => {
-                result.push({ steamId: userId[index], games: element.data.response.games })
+                result.push({ steamId: userId[index], games: element.response.games })
             });
             resolve(result)
         });
