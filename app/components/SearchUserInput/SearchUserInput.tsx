@@ -1,5 +1,5 @@
 import React, { FunctionComponent, SyntheticEvent } from "react";
-import { Input, InputGroup, Icon } from "rsuite";
+import { Input, InputGroup, Icon, IconButton, ButtonToolbar, FlexboxGrid } from "rsuite";
 import { resolveUser } from "../../services/api";
 
 type SearchUserInputProps = {
@@ -23,11 +23,23 @@ export const SearchUserInput: FunctionComponent<SearchUserInputProps> = (props) 
   }
 
   return (
-    <InputGroup size="lg" inside style={{ width: "100%" }}>
-      <Input type="text" onChange={handleChange} onPressEnter={handleSearch} placeholder={"steamId or custom URL"} />
-      <InputGroup.Button onClick={handleSearch} >
-        <Icon icon="search" />
-      </InputGroup.Button>
-    </InputGroup>
+    <FlexboxGrid align="middle" justify="center">
+      <FlexboxGrid.Item colspan={2} >
+        <IconButton href="/api/auth/login" icon={<Icon icon="arrow-right" />} placement="right">
+          Login
+      </IconButton>
+      </FlexboxGrid.Item>
+      <FlexboxGrid.Item colspan={18} >
+        <InputGroup size="lg" inside style={{ width: "100%" }}>
+          <Input type="text" onChange={handleChange} onPressEnter={handleSearch} placeholder={"steamId or custom URL"} />
+          <InputGroup.Button onClick={handleSearch} >
+            <Icon icon="search" />
+          </InputGroup.Button>
+        </InputGroup>
+
+      </FlexboxGrid.Item>
+
+    </FlexboxGrid>
+
   );
 };

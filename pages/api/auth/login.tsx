@@ -1,6 +1,15 @@
 import passport from 'passport'
 import nextConnect from 'next-connect'
 import SteamStrategy from 'passport-steam'
+import { ironSession } from "next-iron-session";
+
+const session = ironSession({
+    cookieName: "user",
+    password: process.env.SECRET_COOKIE_PASSWORD,
+    cookieOptions: {
+        secure: process.env.NODE_ENV === "production",
+    },
+});
 
 const authenticate = (method, req, res) =>
     new Promise((resolve, reject) => {
@@ -26,18 +35,28 @@ passport.use(new SteamStrategy({
     done(null, profile);
 }))
 
+passport.serializeUser((user, next) => {
+    console.log(user);
+    next(null, user);
+});
+
+passport.deserializeUser((obj, next) => {
+    next(null, obj);
+});
+
 export default nextConnect()
+    .use(session)
     .use(passport.initialize())
     .get(async (req: any, res: any) => {
         try {
-            const user: any = await authenticate('steam', req, res)
+            console.log(req.session.get("user"))
+            let user: any = req.session.get("user");
+            if (!user) {
+                user = await authenticate('steam', req, res)
+            }
             console.log(user)
-            // session is the payload to save in the token, it may contain basic info about the user
-            const session = { ...user }
+            res.redirect('/');
 
-            // await setLoginSession(res, session)
-
-            res.status(200).send({ done: true })
         } catch (error) {
             console.error(error)
             res.status(401).send(error.message)

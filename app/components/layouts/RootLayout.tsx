@@ -18,6 +18,7 @@ import { intersectionBy } from 'lodash';
 import { GameListGrid } from "../GameListGrid/GameListGrid";
 
 interface IProps {
+    user: any
 }
 
 interface IState {
@@ -95,9 +96,7 @@ class RootLayout extends React.Component<IProps, IState>{
 
                 )}
                 <Header>
-                    <IconButton href="/api/auth/login" icon={<Icon icon="arrow-right" />} placement="right">
-                        Login
-                                                </IconButton>
+
                     <FlexboxGrid justify="center">
                         <FlexboxGrid.Item style={{ textAlign: "center" }} colspan={6}>
                             <h1>What Do We Play ?</h1>
