@@ -11,6 +11,10 @@ const session = ironSession({
     secure: process.env.NODE_ENV === "production",
   },
 });
+const domain =
+  process.env.NODE_ENV == "development"
+    ? "localhost:3000"
+    : process.env.VERCEL_URL;
 
 const authenticate = (method, req, res) =>
   new Promise((resolve, reject) => {
@@ -30,8 +34,8 @@ const authenticate = (method, req, res) =>
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "http://localhost:3000/api/auth/return",
-      realm: "http://localhost:3000/",
+      returnURL: `http://${domain}/api/auth/return`,
+      realm: `http://${domain}/`,
       apiKey: process.env.STEAM_API_KEY,
     },
     (identifier, profile, done) => {
