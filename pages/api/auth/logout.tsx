@@ -1,4 +1,5 @@
-import { ironSession } from "iron-session/express";
+
+import { withIronSessionApiRoute } from "iron-session/next"
 import axios from "axios";
 import { NextApiResponse } from "next";
 import { send } from "process";
@@ -19,7 +20,7 @@ const handler = (_req: any, res: NextApiResponse) => {
   }
 };
 
-export default withIronSession(handler, {
+export default withIronSessionApiRoute(handler, {
   cookieName: "user",
   password: process.env.SECRET_COOKIE_PASSWORD,
 
