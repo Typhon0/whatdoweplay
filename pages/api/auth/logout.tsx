@@ -1,4 +1,4 @@
-import { withIronSession } from "next-iron-session";
+import { ironSession } from "iron-session/express";
 import axios from "axios";
 import { NextApiResponse } from "next";
 import { send } from "process";
@@ -22,7 +22,5 @@ const handler = (_req: any, res: NextApiResponse) => {
 export default withIronSession(handler, {
   cookieName: "user",
   password: process.env.SECRET_COOKIE_PASSWORD,
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-  },
+
 });

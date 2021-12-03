@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
-import { Input, InputGroup, FlexboxGrid, Icon } from "rsuite";
+import { Input, InputGroup, FlexboxGrid } from "rsuite";
 import { resolveUser } from "../../services/api";
 import "./SearchUserInput.module.scss";
+import SearchIcon from '@rsuite/icons/Search';
 
 type SearchUserInputProps = {
   handleSetSteamId: React.Dispatch<any>;
@@ -15,13 +16,15 @@ export const SearchUserInput: FunctionComponent<SearchUserInputProps> = (
     undefined
   );
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+    console.log(inputValue)
     props.cleanResult();
     const steamId: string = await resolveUser(inputValue);
     props.handleSetSteamId(steamId);
   };
 
   const handleChange = (value: string) => {
+    console.log(value)
     setInputValue(value);
   };
 
@@ -36,7 +39,7 @@ export const SearchUserInput: FunctionComponent<SearchUserInputProps> = (
             placeholder={"steamId or custom URL"}
           />
           <InputGroup.Button onClick={handleSearch}>
-            <Icon icon="search" />
+          <SearchIcon></SearchIcon> 
           </InputGroup.Button>
         </InputGroup>
       </FlexboxGrid.Item>

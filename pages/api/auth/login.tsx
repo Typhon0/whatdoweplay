@@ -1,15 +1,12 @@
 import passport from "passport";
 import nextConnect from "next-connect";
 import SteamStrategy from "passport-steam";
-import { ironSession } from "next-iron-session";
-
+import { ironSession } from "iron-session/express";
 const session = ironSession({
   cookieName: "user",
   password: process.env.SECRET_COOKIE_PASSWORD,
   ttl: 7200,
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-  },
+
 });
 const domain =
   process.env.NODE_ENV == "development"
@@ -58,7 +55,7 @@ export default nextConnect()
   .use(passport.initialize())
   .get(async (req: any, res: any) => {
     try {
-      let user: any = req.session.get("user");
+      let user: any = req.session.user;
       if (!user) {
         user = await authenticate("steam", req, res);
       }

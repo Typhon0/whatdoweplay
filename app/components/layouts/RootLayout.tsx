@@ -8,8 +8,7 @@ import {
   Content,
   Panel,
   Footer,
-  IconButton,
-  Icon,
+  IconButton
 } from "rsuite";
 import {
   getOwnedGamesForUsers,
@@ -20,7 +19,7 @@ import { SearchUserInput } from "../SearchUserInput/SearchUserInput";
 import { UserListGrid } from "../UserListGrid/UserListGrid";
 import { GameListGrid } from "../GameListGrid/GameListGrid";
 import { UserProfile } from "../UserProfile/UserProfile";
-
+import ArrowRightIcon from '@rsuite/icons/ArrowRight';
 interface IProps {
   user: any;
 }
@@ -57,9 +56,9 @@ class RootLayout extends React.Component<IProps, IState> {
 
     const handleNext = async () => {
       const games: any = await getOwnedGamesForUsers(this.state.selected);
-      const gamesArray = games.map((user) => user.games);
-      const filtered = intersection(gamesArray);
-      this.setState({ gamesInCommon: filtered });
+      // const gamesArray = games.map((user) => user.games);
+      // const filtered = intersection(gamesArray);
+      this.setState({ gamesInCommon: games });
     };
 
     const cleanResult = () => {
@@ -152,7 +151,7 @@ class RootLayout extends React.Component<IProps, IState> {
                     <FlexboxGrid justify="end" style={{ margin: 10 }}>
                       <IconButton
                         onClick={handleNext}
-                        icon={<Icon icon="arrow-right" />}
+                        icon={<ArrowRightIcon></ArrowRightIcon>}
                         placement="right"
                       >
                         Next
@@ -168,9 +167,7 @@ class RootLayout extends React.Component<IProps, IState> {
 
               {this.state.friends?.length > 0 &&
                 this.state.gamesInCommon.length > 0 && (
-                  <Panel shaded bordered bodyFill>
-                    <GameListGrid gamesInCommon={this.state.gamesInCommon} />
-                  </Panel>
+                  <GameListGrid gamesInCommon={this.state.gamesInCommon} />
                 )}
             </FlexboxGrid.Item>
           </FlexboxGrid>

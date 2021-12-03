@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const withLess = require('@zeit/next-less');
-const withSass = require('@zeit/next-sass');
+module.exports = {
+  images: {
+    domains: ['media.steampowered.com', 'cdn2.steamgriddb.com', 'steamcdn-a.akamaihd.net'],
+  },
 
-module.exports =withSass({
-  cssModules: true,
-   ...withLess({
-  lessLoaderOptions: {
-    javascriptEnabled: true
-  }})
-});
+};
+
+

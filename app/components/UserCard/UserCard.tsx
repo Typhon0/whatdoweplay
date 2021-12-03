@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { Avatar, FlexboxGrid, Panel } from "rsuite";
-
+import Image from "next/image";
 const styleCenter = {
   display: "flex",
   justifyContent: "center",
@@ -29,7 +29,13 @@ export const UserCard: NextPage<IProps> = (props: IProps) => (
   >
     <FlexboxGrid>
       <FlexboxGrid.Item colspan={8} style={styleCenter}>
-        <Avatar size="lg" src={props.user.avatarfull} />
+        {/* <Avatar c size="lg" src={props.user.avatarfull} /> */}
+        <Image
+          quality={50}
+          src={props.user.avatarfull}
+          width={60}
+          height={60}
+        ></Image>
       </FlexboxGrid.Item>
       <FlexboxGrid.Item
         colspan={6}
