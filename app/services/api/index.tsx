@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 
-axios.defaults.baseURL = process.env.NOW_URL;
 
 export const getOwnedGames = (userId): Promise<any> =>
   new Promise((resolve, reject) => {
