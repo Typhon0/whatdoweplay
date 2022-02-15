@@ -2,6 +2,8 @@ import passport from "passport";
 import nextConnect from "next-connect";
 import SteamStrategy from "passport-steam";
 import { ironSession } from "iron-session/express";
+import { NextApiRequest, NextApiResponse } from "next";
+
 const session = ironSession({
   cookieName: "user",
   password: process.env.SECRET_COOKIE_PASSWORD,
@@ -13,7 +15,7 @@ const domain =
     ? "localhost:3000"
     : process.env.VERCEL_URL;
 
-const authenticate = (method, req, res) =>
+const authenticate = (method, req:NextApiRequest, res:NextApiResponse):Promise<User> =>
   new Promise((resolve, reject) => {
     passport.authenticate(
       method,
@@ -53,9 +55,9 @@ passport.deserializeUser((obj, next) => {
 export default nextConnect()
   .use(session)
   .use(passport.initialize())
-  .get(async (req: any, res: any) => {
+  .get(async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-      let user: any = req.session.user;
+      let user: User = req.session.user;
       if (!user) {
         user = await authenticate("steam", req, res);
       }

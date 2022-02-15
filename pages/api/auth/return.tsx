@@ -11,6 +11,7 @@ const handler = (_req: NextApiRequest, res: NextApiResponse) => {
   axios
     .post(`http://${domain}/api/users/getProfileSummaries`, [STEAMID])
     .then(async (response) => {
+
       _req.session.user = response.data.response.players[0];
       await _req.session.save();
       res.redirect("/");

@@ -2,7 +2,7 @@ import { withIronSessionApiRoute } from "iron-session/next";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = (_req: NextApiRequest, res: NextApiResponse) => {
-  const user: any = _req.session.user;
+  const user: User = _req.session.user;
   if (user) {
     res.send(user);
   }
