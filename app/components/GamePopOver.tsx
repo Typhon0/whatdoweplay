@@ -17,13 +17,3 @@ const speaker = (
   </Popover>
 );
 
-export const GameCard:Popover = (props: PopoverProps) => {
-
-
-  return (
-
-
-
-
-  );
-};
