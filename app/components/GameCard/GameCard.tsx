@@ -49,9 +49,8 @@ export const GameCard: NextPage<IProps> = (props: IProps) => {
                   : `https://steamcdn-a.akamaihd.net/steam/apps/${props.game.appid}/library_600x900.jpg`
               }
             />
-              
             <div className={styles.gradient}></div>
-
+            <button  className={styles.DialogButton} > </button>
           </div>
           </Whisper>  
       </div>

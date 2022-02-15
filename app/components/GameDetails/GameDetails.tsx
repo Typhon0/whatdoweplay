@@ -9,7 +9,7 @@ export const GameDetails = (props: IProps ) => {
   return (
     <div>
    
-       <p>Playtime {props.game.playtime_forever} Hours</p>
+       <p>Playtime {Math.floor(props.game.playtime_forever / 60)} Hours</p>
         <a href={`steam://rungameid/${props.game.appid}`}></a>
     </div>
   );

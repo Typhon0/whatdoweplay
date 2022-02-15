@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 axios.defaults.baseURL = process.env.STEAM_API_URL;
 const API_KEY = process.env.STEAM_API_KEY;
-// const resolveCache = new Map();
 const STATUS_SUCCESS = 1;
 
 const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
@@ -11,7 +10,7 @@ const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
     .then((steamIdResolved: string) => {
       res.status(200).send({ steamID64: steamIdResolved });
     })
-    .catch((err) => {});
+    .catch((err) => { res.status(500).send(err.message) });
 };
 
 /**
@@ -41,20 +40,12 @@ const resolveUser = (info: string): Promise<string> => {
   const idMatch = info.match(reProfileID);
   if (idMatch !== null) {
     const id = idMatch[1];
-
-    // if (resolveCache.has(id)) {
-    //     return Promise.resolve(resolveCache.get(id));
-    // }
-
     return axios
       .get(`ISteamUser/ResolveVanityURL/v1?key=${API_KEY}&vanityurl=${id}`)
-      .then((res: any) => {
+      .then((res: AxiosResponse) => {
         return res.data.response.success === STATUS_SUCCESS
           ? Promise.resolve(res.data.response.steamid)
           : Promise.reject(new TypeError(res.data.response.message));
-        // return res.data.response.success === STATUS_SUCCESS
-        //     ? resolveCache.set(id, res.data.response.steamid).get(id)
-        //     : Promise.reject(new TypeError(res.data.response.message));
       });
   }
 

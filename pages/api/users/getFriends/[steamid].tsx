@@ -15,7 +15,7 @@ const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
         .then((response) => {
           res.send(response.data);
         })
-        .catch((err) => {});
+        .catch((err) => { res.status(500).send(err.message) });
       break;
     default:
       res.setHeader("Allow", ["GET"]);

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
-import { resolve } from "path";
 import SGDB from "steamgriddb";
 
 axios.defaults.baseURL = process.env.STEAM_API_URL;
@@ -18,14 +17,15 @@ const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
         .then((data) => {
           res.send(data);
         })
-        .catch((err) => {});
+        .catch((err) => { res.status(500).send(err.message) });
+
       break;
     case "POST":
       getOwnedGamesForUsers(_req.body)
         .then((data) => {
           res.send(data);
         })
-        .catch((err) => {});
+        .catch((err) => { res.status(500).send(err.message) });
       break;
     default:
       res.setHeader("Allow", ["GET", "POST"]);
