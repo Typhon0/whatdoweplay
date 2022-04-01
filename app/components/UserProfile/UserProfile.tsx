@@ -4,7 +4,7 @@ import { Avatar, Col, Grid, Row } from "rsuite";
 import { logout } from "../../services/api";
 import styles from "./UserProfile.module.scss";
 interface IProps {
-  user: any;
+  user: User;
 }
 
 export const UserProfile: NextPage<IProps> = (props: IProps) => {

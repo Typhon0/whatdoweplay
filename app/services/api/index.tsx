@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
 
-export const getOwnedGames = (userId): Promise<any> =>
+export const getOwnedGames = (userId): Promise<Array<Game>> =>
   new Promise((resolve, reject) => {
     axios
       .get(`api/users/getOwnedGames/${userId}`)
@@ -13,19 +13,19 @@ export const getOwnedGames = (userId): Promise<any> =>
       });
   });
 
-export const getProfileSummaries = (useridArray): Promise<any> =>
+export const getProfileSummaries = (useridArray): Promise<Array<User>> =>
   new Promise((resolve, reject) => {
     axios
       .post("api/users/getProfileSummaries", useridArray)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.response.players);
       })
       .catch((err) => {
         throw err;
       });
   });
 
-export const getOwnedGamesForUsers = (userId: string[]): Promise<any> =>
+export const getOwnedGamesForUsers = (userId: string[]): Promise<Array<Game>> =>
   new Promise((resolve, reject) =>
     axios
       .post("api/users/getOwnedGames", userId)
@@ -55,19 +55,19 @@ export const resolveUser = (info: string): Promise<string> =>
       });
   });
 
-export const getUserFriends = (id): Promise<any> =>
+export const getUserFriends = (id): Promise<Array<Friends>> =>
   new Promise((resolve, reject) => {
     axios
       .get(`api/users/getFriends/${id}`)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data.friendslist.friends);
       })
       .catch((err) => {
         throw err;
       });
   });
 
-export const resolveFriends = (friends): Promise<any> =>
+export const resolveFriends = (friends): Promise<Array<User>> =>
   new Promise((resolve, reject) => {
     getProfileSummaries(friends.map((elem) => elem.steamid)).then((data) => {
       resolve(data);

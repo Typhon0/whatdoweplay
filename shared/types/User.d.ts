@@ -1,5 +1,5 @@
 type User = {
-    steamid: number,
+    steamid: string,
     communityvisibilitystate: number,
     profilestate: number,
     personaname: string,

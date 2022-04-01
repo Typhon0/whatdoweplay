@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import React from "react";
 
 interface IProps {
-  game: any;
+  game: Game;
 }
 
 export const GameDetails = (props: IProps ) => {

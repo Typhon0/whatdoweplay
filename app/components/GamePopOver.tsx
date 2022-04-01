@@ -4,7 +4,7 @@ import { Button, Popover, PopoverProps, Whisper } from "rsuite";
 import styles from "./GameCard.module.scss";
 import Image from "next/image";
 interface IProps {
-  game: any;
+  game: Game;
 }
 
 const speaker = (

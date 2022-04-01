@@ -3,30 +3,23 @@
 }
 
 .library {
-  padding-bottom: 16px;
   max-width: 200px;
 }
 
 .game {
   max-width: 200px;
-  // display: flex;
   perspective: 1000px;
   perspective-origin: center top;
-  // height: max-content;
-
   .gamewrapper {
     max-width: 200px;
-
     position: relative;
     overflow: hidden;
     transform-origin: 100% 0;
     box-shadow: 0px 10px 39px 10px rgba(62, 66, 66, 0.22);
     border-radius: 2px;
     transition: transform 0.3s ease-in-out;
-
     &:hover {
       transform: rotateX(10deg);
-
       .gradient {
         height: 100%;
         opacity: 1;
@@ -40,13 +33,10 @@
     top: 0;
     left: 0;
     z-index: 1;
-
     transform: rotate(30deg);
     transform-origin: top right;
-
     width: 200%;
     height: 65%;
-
     opacity: 0.3;
     background: linear-gradient(
       0turn,
@@ -82,11 +72,9 @@
   width: 100%;
   transition: all .2s ease-out;
   position: relative;
-
   background: linear-gradient(to right, #8ac329 0%, #4a7a16 60%);
   background-position: 25%;
   background-size: 330% 100%;
-
   &:hover {
     background: linear-gradient(to right, #8ac329 0%, #4a7a16 60%);
     background-position: 0%;

@@ -1,5 +1,4 @@
 type GameImage={
-    
         id: number,
         score: number,
         style: string,
@@ -20,6 +19,5 @@ type GameImage={
           name: string,
           steam64: string,
           avatar: string
-        }
-      
+        } 
 }

@@ -1,12 +1,13 @@
 import { NextPage } from "next";
 import React from "react";
-import { Col, FlexboxGrid, Row } from "rsuite";
+import * as useId from "react";
+import { Col, FlexboxGrid, Row, Stack } from "rsuite";
 import { UserCard } from "../UserCard/UserCard";
 
 interface IProps {
   setSelected: (selected: string[]) => void;
   selected: string[];
-  users: any;
+  users: Array<User>;
 }
 export const UserListGrid: NextPage<IProps> = (props: IProps) => {
   function onSelect(steamId) {
@@ -18,18 +19,17 @@ export const UserListGrid: NextPage<IProps> = (props: IProps) => {
   }
 
   return (
-    <FlexboxGrid.Item colspan={24}>
-      <Row>
-        {props.users.map((e, index) => (
-          <Col key={index} md={3} sm={6}>
-            <UserCard
-              onSelect={onSelect}
-              selected={props.selected.some((elem) => e.steamid == elem)}
-              user={e}
-            />
-          </Col>
-        ))}
-      </Row>
-    </FlexboxGrid.Item>
+    <Stack wrap spacing={6} direction="row" justifyContent="flex-start" alignItems="center">
+      {props.users.map((e: User, index: number) => (
+        <UserCard
+          key={index}
+          onSelect={onSelect}
+          selected={props.selected.some((elem) => e.steamid.toString() == elem)}
+          user={e}
+        />
+      ))}
+    </Stack>
   );
 };
+
+

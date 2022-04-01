@@ -1,11 +1,11 @@
 import { NextPage } from "next";
-import { Col, FlexboxGrid, Row } from "rsuite";
+import { Col, FlexboxGrid, Grid, Row, Stack } from "rsuite";
 import { UserCard } from "../UserCard/UserCard";
 
 interface IProps {
   setSelected: (selected: string[]) => void;
   selected: string[];
-  users: any;
+  users: Array<User>;
 }
 
 export const UserList: NextPage<IProps> = (props: IProps) => {
@@ -17,20 +17,20 @@ export const UserList: NextPage<IProps> = (props: IProps) => {
     }
   }
   return (
-    <>
-      <FlexboxGrid.Item style={{ margin: 10 }} colspan={24}>
-        <Row>
-          {props.users.map((e, index) => (
-            <Col key={index} md={3} sm={6}>
-              <UserCard
-                onSelect={onSelect}
-                selected={props.selected.some((elem) => e.steamid == elem)}
-                user={e}
-              />
-            </Col>
-          ))}
-        </Row>
-      </FlexboxGrid.Item>
-    </>
+
+    <FlexboxGrid.Item style={{ margin: 10 }} colspan={24}>
+      <Row>
+        {props.users.map((e, index) => (
+          <Col key={index} md={3} sm={6}>
+            <UserCard
+              onSelect={onSelect}
+              selected={props.selected.some((elem) => e.steamid == elem)}
+              user={e}
+            />
+          </Col>
+        ))}
+      </Row>
+    </FlexboxGrid.Item>
+
   );
 };

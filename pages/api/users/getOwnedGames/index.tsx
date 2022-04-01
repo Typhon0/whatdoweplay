@@ -110,7 +110,7 @@ function intersection(inter) {
 
   for (let i = 0; i < lists.length; i++) {
     const currentList = lists[i];
-    for (let y = 0; y < currentList.length; y++) {
+    for (let y = 0; y < currentList?.length; y++) {
       const currentValue = currentList[y];
       if (
         result.findIndex((item) => item.appid === currentValue.appid) === -1
@@ -118,7 +118,7 @@ function intersection(inter) {
         if (
           lists.filter(
             (obj) =>
-              obj.findIndex((item) => item.appid === currentValue.appid) == -1
+              obj?.findIndex((item) => item.appid === currentValue.appid) == -1
           ).length == 0
         ) {
           result.push(currentValue);

@@ -1,0 +1,17 @@
+figure.item {
+    /* To correctly align image, regardless of content height: */
+    vertical-align: top;
+    display: inline-block;
+    /* To horizontally center images and caption */
+    text-align: center;
+    width: 100px;
+    height: 105px;
+   margin: 0;
+     padding: 0;
+}
+
+.caption {
+    /* Make the caption a block so it occupies its own line. */
+    display: block;
+   
+}
