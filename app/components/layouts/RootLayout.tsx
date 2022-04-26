@@ -21,6 +21,7 @@ import { GameListGrid } from "../GameListGrid/GameListGrid";
 import { UserProfile } from "../UserProfile/UserProfile";
 import ArrowRightIcon from '@rsuite/icons/ArrowRight';
 import { NoGamesInCommonModal } from "../Modals/NoGamesInCommonModal/NoGamesInCommonModal";
+import { SiSteam } from 'react-icons/si';
 interface IProps {
   user: User;
 }
@@ -85,7 +86,7 @@ class RootLayout extends React.Component<IProps, IState> {
   }
 
   render() {
-    
+
     const handleNext = async () => {
       this.setState({ Loading: true })
       const games: Array<Game> = await getOwnedGamesForUsers([...this.state.selected, this.state.currentSteamId]);
@@ -106,12 +107,12 @@ class RootLayout extends React.Component<IProps, IState> {
     return (
 
       <Container>
-        {this.state.Loading && <Loader size="lg" center style={{zIndex:9999}}/>}
+        {this.state.Loading && <Loader size="lg" center style={{ zIndex: 9999 }} />}
         <Header>
           <FlexboxGrid justify="end">
             {!this.props.user && (
-              <a href="/api/auth/login">
-                <img src="/steamlogin2.png"></img>
+              <a style={{ padding: "0 10px", color: "#8cc152" }} href="/api/auth/login" rel="nofollow">
+                <SiSteam style={{ verticalAlign: "middle" }} size={24} /> <span>Sign in</span>
               </a>
             )}
           </FlexboxGrid>
