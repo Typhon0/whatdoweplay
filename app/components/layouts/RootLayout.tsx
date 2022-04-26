@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useEffect } from "react";
+import React, { createContext } from "react";
 import {
   Loader,
   Container,
@@ -31,7 +31,7 @@ interface IState {
   selected: string[];
   gamesInCommon: Game[];
   noGameInCommonModalOpen: boolean;
-  currentSteamId:string;
+  currentSteamId: string;
 }
 
 class RootLayout extends React.Component<IProps, IState> {
@@ -43,13 +43,12 @@ class RootLayout extends React.Component<IProps, IState> {
       selected: [],
       gamesInCommon: new Array<Game>(),
       noGameInCommonModalOpen: false,
-      currentSteamId:undefined
+      currentSteamId: undefined
     };
     this.cleanResult = this.cleanResult.bind(this)
     this.handleSetSteamId = this.handleSetSteamId.bind(this)
     this.closeModals = this.closeModals.bind(this)
     this.resetSearch = this.resetSearch.bind(this)
-
   }
 
   cleanResult = () => {
@@ -69,7 +68,7 @@ class RootLayout extends React.Component<IProps, IState> {
     this.setState({
       friends: friendsResolved,
       Loading: false,
-      currentSteamId:id
+      currentSteamId: id
     });
   };
 
@@ -86,24 +85,28 @@ class RootLayout extends React.Component<IProps, IState> {
   }
 
   render() {
-
+    
     const handleNext = async () => {
+      this.setState({ Loading: true })
       const games: Array<Game> = await getOwnedGamesForUsers([...this.state.selected, this.state.currentSteamId]);
       if (games?.length == 0) {
         this.setState({
           noGameInCommonModalOpen: true,
+          Loading: false
         });
       } else {
-        this.setState({ gamesInCommon: games });
+        this.setState({ gamesInCommon: games, Loading: false });
       }
     };
 
     const setSelected = (selected) => {
       this.setState({ selected });
     };
+
     return (
+
       <Container>
-        {this.state.Loading && <Loader size="md" center />}
+        {this.state.Loading && <Loader size="lg" center style={{zIndex:9999}}/>}
         <Header>
           <FlexboxGrid justify="end">
             {!this.props.user && (
